@@ -6,9 +6,13 @@
   roles:
   - { role: aws_infra_ansible, vpc_state: 'create' }
 
-# - name: Provision AWS Infrastucture using Terraform 
-#   hosts: local_target
-#   roles:
-#   - { role: aws_infra_terraform }
+- name: Install nodejs app
+  hosts: all
+  become: yes
+  roles:
+  - { role: epel         }
+  - { role: mongodb      }
+  - { role: nodejs       }
+  - { role: nodejs_app   }
 
 
