@@ -52,7 +52,7 @@
     state:  present
     vpc_id: "{{ aws_vpc_id }}"
     region: "{{ aws_region }}"
-    tags: "{{ igw_resource_tags }}"
+    # tags: "{{ igw_resource_tags }}"
   register: igw
   tags:
     - vpc_create
