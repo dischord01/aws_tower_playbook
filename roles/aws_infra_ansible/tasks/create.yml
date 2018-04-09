@@ -201,28 +201,28 @@
 #---------------------------------------------------
 #  EC2 Node
 #---------------------------------------------------
-- name: Launch EC2 Node Instance
-  ec2:
-    wait: yes
-    region:           "{{ aws_region }}"
-    image:            "{{ ec2_ami }}"
-    key_name:         "{{ ec2_keypair }}"
-    group_id:         "{{ sg.group_id }}"
-    instance_type:    "{{ ec2_node_type }}"
-    assign_public_ip: "{{ ec2_public_ip }}"
-    vpc_subnet_id:    "{{ aws_subnet_id }}"
-    instance_tags:    "{{ ec2_node_tag }}"
-    exact_count:      "{{ ec2_exact_count }}"    
-    count_tag:        "node"
-    volumes:
-      - device_name: /dev/xvda
-        volume_type: gp2
-        volume_size: 15
-        delete_on_termination: true
-  with_sequence: count="{{ ec2_sequence }}"
-  register: ec2_node
-  tags:
-    - vpc_create
+# - name: Launch EC2 Node Instance
+#   ec2:
+#     wait: yes
+#     region:           "{{ aws_region }}"
+#     image:            "{{ ec2_ami }}"
+#     key_name:         "{{ ec2_keypair }}"
+#     group_id:         "{{ sg.group_id }}"
+#     instance_type:    "{{ ec2_node_type }}"
+#     assign_public_ip: "{{ ec2_public_ip }}"
+#     vpc_subnet_id:    "{{ aws_subnet_id }}"
+#     instance_tags:    "{{ ec2_node_tag }}"
+#     exact_count:      "{{ ec2_exact_count }}"    
+#     count_tag:        "node"
+#     volumes:
+#       - device_name: /dev/xvda
+#         volume_type: gp2
+#         volume_size: 15
+#         delete_on_termination: true
+#   with_sequence: count="{{ ec2_sequence }}"
+#   register: ec2_node
+#   tags:
+#     - vpc_create
 
 
 - pause:

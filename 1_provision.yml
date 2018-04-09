@@ -6,13 +6,5 @@
   roles:
   - { role: aws_infra_ansible, vpc_state: 'create' }
 
-- name: Install nodejs app
-  hosts: all
-  become: yes
-  roles:
-  - { role: epel         }
-  - { role: mongodb      }
-  - { role: nodejs       }
-  - { role: nodejs_app   }
 
 
