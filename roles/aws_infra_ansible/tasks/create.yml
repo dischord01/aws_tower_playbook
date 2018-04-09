@@ -71,7 +71,7 @@
   ec2_vpc_route_table:
     vpc_id: "{{ aws_vpc_id }}"
     region: "{{ aws_region }}"
-    tags:   "{{ route_resource_tags }}"
+    # tags:   "{{ route_resource_tags }}"
     subnets:
       - "{{ aws_subnet_id }}"
     routes:
@@ -112,7 +112,7 @@
     name:   "{{ sg_name }}"
     vpc_id: "{{ aws_vpc_id }}"
     region: "{{ aws_region }}"
-    tags: "{{ sg_resource_tags }}"
+    # tags: "{{ sg_resource_tags }}"
     rules:
       - proto: tcp
         from_port: 80
