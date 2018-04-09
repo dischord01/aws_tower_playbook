@@ -1,0 +1,16 @@
+---
+#---------------------------------------------------------
+# Ansible Tower: 
+# http://redhatgov.io/workshops/ansible_tower/
+#---------------------------------------------------------
+- name: Ansible Tower | Configure nodes
+  become: yes
+  remote_user: "{{ system_user }}"
+  hosts: all
+  roles:
+    - { role: subscription_manager }
+    - { role: epel                 }
+    - { role: nodejs               }
+    - { role: zsh                  } 
+    # - { role: ansible_tower        }
+    # - { role: wetty                }

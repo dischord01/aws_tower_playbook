@@ -1,0 +1,57 @@
+# file: roles/nodejs_app/tasks/main.yml
+---
+
+- name: create web directory
+  file: 
+    name: nodejs_app 
+    path: "/home/{{ system_user }}"
+    state: directory
+    owner: "{{ system_user }}"
+    group: "{{ system_user }}"
+    mode: 0700
+
+- name: create mongodb data directory
+  file: 
+    path: /data
+    state: directory
+    owner: root
+    group: root
+
+- name: create mongodb db directory
+  file:  
+    path: /data/db
+    state: directory
+    owner: root
+    group: root
+
+- name: Start MongoDB
+  command: /etc/init.d/mongod start
+
+# make sure git & mongodbis installed
+- name: install git
+  yum: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+
+# Get the latest snapshot
+- name: Git Clone
+  git:
+    dest: "/home/{{ system_user }}/nodejs_app"
+    repo: "https://github.com/sahat/hackathon-starter.git"
+
+# Change directory
+- name: NPM Install  
+  command: npm install chdir="/home/{{ system_user }}/nodejs_app"
+
+# systemd
+- name: Create Systemd unit file
+  template: 
+    src: express.service.j2
+    dest: /etc/systemd/system/express.service
+
+- name: Start service
+  service:
+    name: express
+    state: started

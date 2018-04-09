@@ -1,0 +1,22 @@
+[Unit]
+Description=Express
+# Set dependencies to other services (optional)
+#After=mongodb.service
+
+[Service]
+# Start the js-file starting the express server
+ExecStart=/usr/bin/node app.js
+WorkingDirectory=/home/{{system_user}}/nodejs_app
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=Express
+# Change to a non-root user (optional, but recommended)
+#User=<alternate user>
+#Group=<alternate group>
+# Set environment options
+Environment=NODE_ENV=production PORT=8080
+
+[Install]
+WantedBy=multi-user.target

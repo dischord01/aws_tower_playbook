@@ -1,0 +1,76 @@
+---
+# file: group_vars
+#######################################################################################
+#
+#                  ////IMPORTANT////
+#
+#      Prefixed to all resources for cleanup & identifcation.
+#######################################################################################
+
+workshop_prefix:                     "cic2"
+owner_email:                         "bsollar@redhat.com"
+expiration_date:                     "N/A"
+
+   
+#######################################################################################
+# ANSIBLE ROLE KEY                   VALUE
+#######################################################################################
+# aws.infra                          .redhatgov working dir 
+terraform_working_dir:               "{{ lookup('env','PWD') }}/.redhatgov"
+# aws.infra                          AWS API KEYS
+aws_access_key:                      "{{ vault_aws_access_key }}"
+aws_secret_key:                      "{{ vault_aws_secret_key }}"
+# aws.infra                          AWS Route 53
+domain_name:                         "{{ vault_domain_name }}"
+zone_id:                             "{{ vault_zone_id }}"
+# aws.infra                          AWS Terraform Vars
+number_master_nodes:                 1                                     # Master Nodes  (OpenShift Master nodes or Ansible Tower nodes)
+number_nodes:                        0                                     # Compute Nodes (OpenShift Compute nodes or Tower managed nodes)
+master_instance_type:                "t2.medium"                           # Master Instance Size  (OpenShift m4.xlarge)
+node_instance_type:                  "t2.micro"                            # Compute Instance Size (OpenShift m4.large)
+region:                              "us-east-1"                           # AWS Region, configures ec2.ini too
+zone:                                "us-east-1f"
+ebs_root_block_size:                 50    
+ami_id:                              "{{ vault_cloud_access_east_1 }}"     # Cloud Access RHEL 7.4 (NOVA us-east-1)
+# ami_id:                              "{{ vault_cloud_access_east_2 }}"     # Cloud Access RHEL 7.4 (Ohio us-east-2)
+# ami_id:                              "{{ vault_cloud_access_west_1 }}"     # Cloud Access RHEL 7.4 (Ohio us-west-1)
+# ami_id:                            "ami-cfdafaaa"                        # us-east-2 RHEL 7.4 
+# ami_id:                            "ami-c998b6b2"                        # us-east-1 RHEL 7.4
+#--------------------------------------------------------------------------------------
+# subscription_manager               Red Hat Subscription via Cloud Access
+cloud_access:                        true
+# subscription_manager               Red Hat Subscription via username & password
+username:                            "{{ vault_subscription_username }}"
+password:                            "{{ vault_subscription_password }}"
+pool_id:                             "{{ vault_subscription_pool_id }}"
+# subscription_manager               Red Hat Subscription via activation keys
+rhsm_activationkey:                  "{{ vault_subscription_activation_key }}"
+rhsm_org_id:                         "{{ vault_subscription_org_id }}"
+#--------------------------------------------------------------------------------------
+# wetty                              password
+workshop_password:                   "{{ vault_wetty_password }}"
+#--------------------------------------------------------------------------------------
+# Docker configuration
+os_docker_block_device:              "/dev/xvdb"
+os_docker_volume_group:              "docker-vg"
+os_docker_vol_size:                  "50"
+os_docker_vol_type:                  "gp2"
+#--------------------------------------------------------------------------------------
+# OpenShift configuration
+openshift_release:                   "3.6"
+default_home:                        "/home/{{ system_user }}"
+default_ssh:                         "{{ default_home }}/.ssh"
+inventory_ose_masters:               "{{ groups['masters'] }}"
+inventory_ose_nodes:                 "{{ groups['nodes'] }}"
+#######################################################################################
+# ANSIBLE config                     VALUE
+#######################################################################################
+# Dynamic Inventory    
+inventory_working_dir:               "{{ lookup('env','PWD') }}/inventory"
+# Ansible SSH Key Location           SSH Key Vars
+ssh_key_path:                        "{{ lookup('env','PWD') }}/.redhatgov/{{ workshop_prefix }}-private-key"
+ansible_ssh_private_key_file:        "{{ lookup('env','PWD') }}/.redhatgov/{{ workshop_prefix }}-private-key"
+ssh_key_name:                        "{{ workshop_prefix }}-private-key"
+system_user:                         "ec2-user"                            # AWS
+# system_user:                       "vagrant"                             # vagrant
+    

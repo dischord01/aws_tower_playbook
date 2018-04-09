@@ -1,0 +1,4 @@
+# file: roles/nodejs_app/defaults/main.yml
+---
+#
+# foo: default

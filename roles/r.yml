@@ -1,0 +1,36 @@
+---
+- src: https://github.com/dischord01/aws_infra_ansible.git
+  version: master
+  name: aws_infra_ansible
+
+- src: https://github.com/dischord01/subscription_manager.git
+  version: master
+  name: subscription_manager
+
+- src: https://github.com/dischord01/epel.git
+  version: master
+  name: epel
+
+- src: https://github.com/dischord01/nodejs.git
+  version: master
+  name: nodejs
+
+- src: https://github.com/dischord01/ansible_tower.git
+  version: master
+  name: ansible_tower
+
+- src: https://github.com/dischord01/zsh.git
+  version: master
+  name: zsh
+
+- src: https://github.com/dischord01/wetty.git
+  version: master
+  name: wetty
+
+- src: https://github.com/dischord01/nodejs_app.git
+  version: master
+  name: nodejs_app
+
+- src: https://github.com/dischord01/mongodb.git
+  version: master
+  name: mongodb
